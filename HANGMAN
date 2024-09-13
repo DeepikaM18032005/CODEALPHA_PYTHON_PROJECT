@@ -1,0 +1,57 @@
+import random
+from random_word import RandomWords
+r = RandomWords()
+
+print("Let's play hangman!")
+
+# Getting a random word from the random_word library
+word = (r.get_random_word()).lower()
+#word = 'baboon'
+#print(word)
+word_len = len(word)
+placeholder = ""
+total_chance = word_len
+user_guesses_list = []
+# Creating the plcaeholders
+for letter in range(0, word_len):
+  placeholder += "_"
+print("The word to be guessed is: ", placeholder)
+
+# Creating the listed format of placeholder
+listed_placeholder = list(placeholder)
+
+# Creating the loop
+while total_chance > 0 and placeholder != word:
+
+  # Getting the input from user
+  user_guess = input("Guess a letter: ").lower()
+
+  # Checking if the user has already guessed the letter
+  if user_guess in user_guesses_list:
+    print("You have already guessed this letter. Try again!")
+  else:
+    # Checking if the letter is in the word
+    for letter in range(0, word_len):
+      if user_guess == word[letter]:
+        listed_placeholder[letter] = user_guess
+      else:
+        listed_placeholder
+    #updated_placeholder = "".join(listed_placeholder)
+    placeholder = "".join(listed_placeholder)
+
+    # Checking the lifes left
+    if user_guess in word:
+      placeholder
+    else:
+      total_chance -= 1
+      print(f"You guessed {user_guess}, that's not in the word.\nYou lose a life.\nTotal lives left: {total_chance}")
+    print(placeholder)
+
+    # Adding the guessed letter to the list
+    user_guesses_list.append(user_guess)
+
+# Checking if the user won the game
+if total_chance == 0:
+  print(f"The word to be guessed is: {word}\nYou have lost the game.")
+else:
+  print("You have won the game! Congratulations!")
